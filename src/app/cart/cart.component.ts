@@ -36,13 +36,10 @@ showDanger(dangerTpl: any) {
       selectedColor: color,
       selectedSize: size
     }
-    console.log(data);
-    
+    console.log(data); 
     this.Product.decreaseQuantity(data).subscribe((data:any)=>{
       console.log(data);
-      this.getCartDetail()
-     
-      
+      this.getCartDetail() 
     })
   }
  
@@ -100,8 +97,6 @@ showDanger(dangerTpl: any) {
     this.totalcount.changeMessage2(totalAmount)
     this.totalcount.changeMessage(this.cart.length)
     })
-    
-   
   }
   removeCart(id:string,color:string,size:string){
     const data={

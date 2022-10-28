@@ -94,19 +94,25 @@
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
-                            <i class="fa fa-minus"></i>
+                            <button class="btn btn-sm btn-primary btn-plus"  (click)="increseClick(single_post._id,'63492b354542210d8ae4fff3','6347eb5d84e80f4770a11df2')">
+                            <i class="fa fa-plus"></i>
                             </button>
-                        </div>
+                       
                         <input type="text" class="form-control bg-secondary text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
+                        <button class="btn btn-sm btn-primary btn-minus" (click)="decreseClick(single_post._id,'63492b354542210d8ae4fff3','6347eb5d84e80f4770a11df2')" >
+                           
+                            <i class="fa fa-minus"></i>
+
                             </button>
-                        </div>
+                       
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    <button *ngIf="isItemIncart else elseBlock" class="btn btn-primary px-3" (click)="handleViewCart()" ><i class="fa fa-shopping-cart mr-1"></i>View Cart</button>
+                    <ng-template #elseBlock>
+                        <button  class="btn btn-primary px-3" (click)="handleAddToCartClick(single_post._id)" ><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+
+
+                    </ng-template>
+
                 </div>
                 <div class="d-flex pt-2">
                     <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>

@@ -25,13 +25,13 @@ export class ProductComponentListComponent implements OnInit {
   isWishlist: boolean | any;
 
   posts = <Props[]>[]
-  cart:any[]=[]
-  isItemIncart=0
+  cart: any[] = []
+  isItemIncart = 0
   page = 0;
   pageSize = 3;
   collectionSize = 0;
   isValid = true
-  totalcount=0
+  totalcount = 0
   constructor(private router: Router,
     private product: ProductService,
     private toaster: ToasterService,
@@ -62,10 +62,10 @@ export class ProductComponentListComponent implements OnInit {
   handleViewClick(id: any) {
     this.router.navigate(['/single-detail', { "product_id": id }]);
   }
-  handleViewCart(){
+  handleViewCart() {
     this.router.navigate(['/cart-detail']);
   }
-  
+
   handleAddToCartClick(id: any) {
     const data = {
       productId: id,
@@ -86,60 +86,52 @@ export class ProductComponentListComponent implements OnInit {
       // this.signupForm.reset();
     })
   }
-  getCartDetail(){
-    let totalAmount=0
-    this.product.getCart().subscribe((data:any)=>{
-      this.cart=data.cart.items 
-      data.cart.items.forEach((item:any)=>{
-        totalAmount+= item.product.price*item.totalProductQuantity;
-    }); 
+  getCartDetail() {
+    let totalAmount = 0
+    this.product.getCart().subscribe((data: any) => {
+      this.cart = data.cart.items
+      data.cart.items.forEach((item: any) => {
+        totalAmount += item.product.price * item.totalProductQuantity;
+      });
 
-    this.data.changeMessage2(totalAmount)
+      this.data.changeMessage2(totalAmount)
     })
   }
-isIncart(id:any){
- 
-this.isItemIncart=0
-  this.cart.forEach((element) => {
-    console.log("id",element.product.id);
-    
-      if (element.product.id ==id) {
-        console.log("matched");
-        
-        this.isItemIncart=1
+  isIncart(id: any) {
+
+    this.isItemIncart = 0
+    this.cart.forEach((element) => {
+      if (element.product.id == id) {
+        this.isItemIncart = 1
       }
     });
-}
-decreseClick(id:number,color:string,size:string){
-  const data={
-    productId: id,
-    selectedColor: color,
-    selectedSize: size
   }
-  console.log(data);
-  
-  this.product.decreaseQuantity(data).subscribe((data:any)=>{
-    console.log(data);
-    this.getCartDetail()
-   
-    this.getProductData()
-    
-  })
-}
-increseClick(id:number,color:string,size:string){
-  const data={
-    productId: id,
-    selectedColor: color,
-    selectedSize: size
+
+  decreseClick(id: number, color: string, size: string) {
+    const data = {
+      productId: id,
+      selectedColor: color,
+      selectedSize: size
+    }
+    this.product.decreaseQuantity(data).subscribe((data: any) => {
+      this.getCartDetail()
+      this.getProductData()
+    })
   }
-  console.log(data);
-  
-  this.product.increaseQuantity(data).subscribe((data:any)=>{
+  increseClick(id: number, color: string, size: string) {
+    const data = {
+      productId: id,
+      selectedColor: color,
+      selectedSize: size
+    }
     console.log(data);
-    this.getCartDetail()
-    this.getProductData()
-  })
-}
+
+    this.product.increaseQuantity(data).subscribe((data: any) => {
+      console.log(data);
+      this.getCartDetail()
+      this.getProductData()
+    })
+  }
   getWishlistProduct() {
     this.product.getWishlist().subscribe((data: any) => {
       console.log(data.favorite.products);
@@ -158,6 +150,7 @@ increseClick(id:number,color:string,size:string){
     const data = {
       productId: id
     }
+    
     this.product.addWhishlist(data).subscribe((data: any) => {
       this.showSuccess("Item added to Wishlist successfully")
       this.getWishlistProduct()
