@@ -1,0 +1,143 @@
+
+<div class="text-center"><h1>Registration</h1></div>
+<div class="container">
+
+  <br />
+  <form (ngSubmit)='registerUser()' [formGroup]="signupForm"  class="form" enctype="multipart/form-data">
+    <div class="mb-3 form-check">
+      <input id="name" type="text" placeholder="Name" class="form-control" formControlName="name">
+      <div *ngIf="formAltaControls.name.invalid && (formAltaControls.name.dirty || formAltaControls.name.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.name.errors.required">
+          <app-alertbok color="danger" child="Name field is required">
+          </app-alertbok>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input id="role" type="text" placeholder="Role" class="form-control" formControlName="role">
+      <div *ngIf="formAltaControls.role.invalid && (formAltaControls.role.dirty || formAltaControls.role.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.role.errors.required">
+          <app-alertbok color="danger" child="Role field is required">
+          </app-alertbok>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input id="username" type="text" placeholder="Username" class="form-control" formControlName="username">
+      <div
+        *ngIf="formAltaControls.username.invalid && (formAltaControls.username.dirty || formAltaControls.username.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.username.errors.required">
+          <app-alertbok color="danger" child=" Username field is required">
+          </app-alertbok>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-3 form-check">
+      <input id="address" type="text" placeholder="Address" class="form-control" formControlName="address">
+      <div
+        *ngIf="formAltaControls.address.invalid && (formAltaControls.address.dirty || formAltaControls.address.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.address.errors.required">
+          <app-alertbok color="danger" child=" Address field is required">
+          </app-alertbok>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input id="phone" type="text" placeholder="phone" class="form-control" formControlName="phone">
+      <div *ngIf="formAltaControls.phone.invalid && (formAltaControls.phone.dirty || formAltaControls.phone.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.phone.errors.required">
+          <app-alertbok color="danger" child="phone field is required">
+          </app-alertbok>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input id="email" type="email" placeholder="Ex:ppa@narola.email" class="form-control" formControlName="email">
+      <div *ngIf="formAltaControls.email.invalid && (formAltaControls.email.dirty || formAltaControls.email.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.email.errors">
+          <div *ngIf="formAltaControls.email.errors.required">
+            <app-alertbok color="danger" child="email field is required">
+            </app-alertbok>
+          </div>
+          <div *ngIf="formAltaControls.email.errors.email">
+            <app-alertbok color="danger" child="Please enter valid email">
+            </app-alertbok>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input id="password" type="password" placeholder="Password" class="form-control" formControlName="password">
+      <div
+        *ngIf="formAltaControls.password.invalid && formAltaControls.password.errors && (formAltaControls.password.dirty || formAltaControls.password.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.password.errors.required">
+          <app-alertbok color="danger" child="This field is required">
+          </app-alertbok>
+        </div>
+        <div
+          *ngIf="formAltaControls.password.errors.hasNumber ||formAltaControls.password.errors.hasCapitalCase ||formAltaControls.password.errors.hasSpecialCharacters ">
+          <app-alertbok color="danger" child="  Length needs to be 8+ long & contain a
+          (number, special characters, small case & capitalize).">
+          </app-alertbok>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input id="confirmpassword" placeholder="Confirm Password" type="password" class="form-control"
+        formControlName="confirmpassword">
+      <div
+        *ngIf="(formAltaControls.confirmpassword.errors ||signupForm.errors?.notConfirmed )&& (formAltaControls.confirmpassword.dirty || formAltaControls.confirmpassword.touched)"
+        role="alert">
+        <div>
+          <div *ngIf="formAltaControls.confirmpassword.errors?.required">
+            <app-alertbok color="danger" child=" This field is required">
+              This field is required
+            </app-alertbok>
+          </div>
+          <div *ngIf="!formAltaControls.confirmpassword.errors?.required && signupForm.errors?.notConfirmed">
+            <app-alertbok color="danger" child="  Confirm password not match with password">
+            </app-alertbok>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input (change)="onChange($event)" type="file" formControlName="imageInput" class="form-control"
+        id="inputEmail4">
+      <div
+        *ngIf="(formAltaControls.imageInput.invalid && formAltaControls.imageInput.errors )&& (formAltaControls.imageInput.dirty || formAltaControls.imageInput.touched)"
+        role="alert">
+        <div *ngIf="formAltaControls.imageInput.errors.required">
+          <app-alertbok color="danger" child="This field is required">
+          </app-alertbok>
+        </div>
+      </div>
+      <div *ngIf="!isValid">
+        <app-alertbok color="danger" child="Please select image type as JPG,PNG,JPEG">
+        </app-alertbok>
+      </div>
+    </div>
+    <div class="card-footer text-right">
+      <small><a routerLink="../login">Already Registered?</a></small>
+  </div>
+    <div class="mb-3 form-check">
+      <button  class="form-control" class="btn btn-primary">Register</button>
+    </div>
+  </form>
+</div>

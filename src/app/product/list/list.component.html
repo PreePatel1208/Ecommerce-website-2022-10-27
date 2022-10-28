@@ -1,0 +1,245 @@
+<div class="container pt-5 pb-5">
+    <div class="dropdown">
+        <div class="col-12">
+
+            <div class="justify-content-between">
+                <div class="col-12">
+                    <div class="col-6">
+                        <h1>Product List</h1>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-warning mb-2 col-md-2" (click)="open(content)">Add
+                            Product</button>
+                    </div>
+                </div>
+                <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-basic-title">Product here!</h4>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <br />
+                            <form [formGroup]="signupForm" (ngSubmit)='addpost()' enctype="multipart/form-data"
+                                class="form">
+                                <div class="mb-3 form-check">
+                                    <input id="name" type="text" placeholder="Name" class="form-control"
+                                        formControlName="name">
+                                    <div *ngIf="formAltaControls.name.invalid && (formAltaControls.name.dirty || formAltaControls.name.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.name.errors.required">
+                                            <app-alertbok color="danger" child="Name field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input id="price" type="text" placeholder="price of the book" class="form-control"
+                                        formControlName="price">
+                                    <div *ngIf="formAltaControls.price.invalid && (formAltaControls.price.dirty || formAltaControls.price.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.price.errors.required">
+                                            <app-alertbok color="danger" child="Price Name field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input id="sold" type="text" placeholder="sold of the book" class="form-control"
+                                        formControlName="sold">
+                                    <div *ngIf="formAltaControls.sold.invalid && (formAltaControls.sold.dirty || formAltaControls.sold.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.sold.errors.required">
+                                            <app-alertbok color="danger" child="sold Name field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input id="quantity" type="text" placeholder="quantity of the book"
+                                        class="form-control" formControlName="quantity">
+                                    <div *ngIf="formAltaControls.quantity.invalid && (formAltaControls.quantity.dirty || formAltaControls.quantity.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.quantity.errors.required">
+                                            <app-alertbok color="danger" child="quantity Name field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+                            <form [formGroup]="colors">
+                                <div class="mb-3 form-check">
+                                    Choose colors
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Red"
+                                            formControlName="Red" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Red
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Green"
+                                            formControlName="Green" id="flexCheckCheckeda" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Green
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" formControlName="Blue"
+                                            value="Blue" id="flexCheckCheckedc" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Blue
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                            <form [formGroup]="sizes">
+                                <div class="mb-3 form-check">
+                                    Choose sizes
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Red"
+                                            formControlName="L" id="flexCheckDefaultd">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            S
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="Green"
+                                            formControlName="M" id="flexCheckCheckedf" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            M
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" formControlName="S"
+                                            value="Blue" id="flexCheckCheckede" checked>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            L
+                                        </label>
+                                    </div>
+                                </div>
+                                </form>
+
+                                <div class="mb-3 form-check">
+                                    <input id="priceDiscount" type="text" placeholder="priceDiscount of the book"
+                                        class="form-control" formControlName="priceDiscount">
+                                    <div *ngIf="formAltaControls.priceDiscount.invalid && (formAltaControls.priceDiscount.dirty || formAltaControls.priceDiscount.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.priceDiscount.errors.required">
+                                            <app-alertbok color="danger" child="priceDiscount field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <input id="description" type="text" placeholder="description of the book"
+                                        class="form-control" formControlName="description">
+                                    <div *ngIf="formAltaControls.description.invalid && (formAltaControls.description.dirty || formAltaControls.description.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.description.errors.required">
+                                            <app-alertbok color="danger" child="Description Name field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <div *ngIf="button!=='update'" class="mb-3 form-check">
+                                    <input id="image" type="file" (change)="handlefilechange($event)"
+                                        placeholder="image of the book" class="form-control" formControlName="image">
+                                    <div *ngIf="formAltaControls.image.invalid && (formAltaControls.image.dirty || formAltaControls.image.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.image.errors.required">
+                                            <app-alertbok color="danger" child="image url field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 form-check">
+                                    <select class="form-select mb-2" formControlName="category"
+                                        aria-label="Default select example">
+                                        <option selected value="Select Category">Select Category </option>
+                                        <option *ngFor="let data of categories" value={{data._id}}
+                                            [selected]="formAltaControls.category == data._id">
+                                            {{ data.name }}
+                                        </option>
+
+                                    </select>
+                                    <div *ngIf="formAltaControls.category.invalid && (formAltaControls.category.dirty || formAltaControls.category.touched)"
+                                        role="alert">
+                                        <div *ngIf="formAltaControls.category.errors.required">
+                                            <app-alertbok color="danger" child="category field is required">
+                                            </app-alertbok>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" formControlName="isOutOfStock"
+                                            name="isOutOfStock" id="flexRadioDefault1" value="true">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            True
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" formControlName="isOutOfStock"
+                                            name="isOutOfStock" value="false" id="flexRadioDefault2" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            False
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <button  class="form-control"
+                                        class="btn btn-success">{{button}}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancel</button>
+                    </div>
+                </ng-template>
+
+                <ul *ngIf="posts" class="list-group">
+                    <table class="table border">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">name</th>
+                                <th scope="col">Discription</th>
+                                <th scope="col">price</th>
+                                <th scope="col">category</th>
+                                <th scope="col">Operation</th>
+                            </tr>
+                        </thead>
+                        <!-- {{posts|json}} -->
+                        <tr *ngFor="let data of posts" class="border">
+
+                            <td><img src="{{data.mainImage}}" height="100" width="100" alt=""></td>
+                            <td> {{data.name}}</td>
+                            <td> {{data.description}}</td>
+                            <td> {{data.price}}</td>
+                            <td> {{data.category.name}}</td>
+                            <td>
+                                <div class="badge badge-primary badge-pill">
+                                    <button type="button" class="btn btn-success me-1"
+                                        (click)="open(content,data.id)">Update</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        (click)="delete(data.id)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                        (pageChange)="getPremiumData();">
+                    </ngb-pagination> -->
+
+                </ul>
+            </div>
+        </div>
+        <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+    </div>

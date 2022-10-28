@@ -1,0 +1,92 @@
+<div class="container pt-5 pb-5">
+    <div class="col-12">
+        <div class="d-flex flex-wrap justify-content-between">
+            <h1>Post List</h1>
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">posts here!</h4>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <br />
+                        <form #postdata="ngForm" (ngSubmit)='addpost(postdata.value)' [formGroup]="signupForm"
+                            novalidate class="form">
+                            <div class="mb-3 form-check">
+                                <input id="title" type="text" placeholder="Title" class="form-control"
+                                    formControlName="title">
+                                <div *ngIf="formAltaControls.title.invalid && (formAltaControls.title.dirty || formAltaControls.title.touched)"
+                                    role="alert">
+                                    <div *ngIf="formAltaControls.title.errors.required">
+                                        <app-alertbok color="danger" child="Title Name field is required">
+                                        </app-alertbok>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input id="author" type="text" placeholder="Author of the book" class="form-control"
+                                    formControlName="author">
+                                <div *ngIf="formAltaControls.author.invalid && (formAltaControls.author.dirty || formAltaControls.author.touched)"
+                                    role="alert">
+                                    <div *ngIf="formAltaControls.author.errors.required">
+                                        <app-alertbok color="danger" child="Author Name field is required">
+                                        </app-alertbok>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input id="description" type="text" placeholder="description of the book"
+                                    class="form-control" formControlName="description">
+                                <div *ngIf="formAltaControls.description.invalid && (formAltaControls.description.dirty || formAltaControls.description.touched)"
+                                    role="alert">
+                                    <div *ngIf="formAltaControls.description.errors.required">
+                                        <app-alertbok color="danger" child="Description Name field is required">
+                                        </app-alertbok>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <button [disabled]='signupForm.invalid' class="form-control"
+                                    class="btn btn-primary">{{button}}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancel</button>
+                </div>
+            </ng-template>
+
+            <button type="button" class="btn btn-primary mb-2" (click)="open(content)">Add post</button>
+
+            <ul *ngIf="posts" class="list-group">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Discription</th>
+                            <th scope="col">Operation</th>
+                        </tr>
+                    </thead>
+
+                    <tr *ngFor="let data of posts">
+                        <th scope="row">{{data.id}}</th>
+                        <td> {{data.title}}</td>
+                        <td> {{data.author}}</td>
+                        <td> {{data.descrition}}</td>
+                        <td>
+                            <div class="badge badge-primary badge-pill">
+                                <button type="button" class="btn btn-success me-1"
+                                    (click)="open(content,data.id)">Update</button>
+                                <button type="button" class="btn btn-secondary"
+                                    (click)="delete(data.id)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </ul>
+        </div>
+    </div>
+</div>
