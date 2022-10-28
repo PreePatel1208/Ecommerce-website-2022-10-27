@@ -36,14 +36,14 @@ import { ToasterService } from './services/toaster.service';
     ProductlistModule
   ],
  
-    providers: [
-      {
-    provide: HTTP_INTERCEPTORS,
-    useClass: ErrorHandlerInterceptor,
-    multi: true,
-    deps: [ToasterService, ]
-  }
-  ],
+  //   providers: [
+  //     {
+  //   provide: HTTP_INTERCEPTORS,
+  //   useClass: ErrorHandlerInterceptor,
+  //   multi: true,
+  //   deps: [ToasterService, ]
+  // }
+  // ],
   bootstrap: [AppComponent],
   exports:[
   

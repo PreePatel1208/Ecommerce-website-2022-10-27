@@ -18,6 +18,7 @@ export class JWTDecodeService {
 
   setToken(token: string) {
     if (token) {
+      localStorage.removeItem('jwt-token');
       sessionStorage.setItem('jwt-token',token);
       console.log( this.jwtToken);
       this.jwtToken= sessionStorage.getItem('jwt-token')
@@ -28,17 +29,17 @@ export class JWTDecodeService {
       if(this.isTokenExpired()){
         return   sessionStorage.getItem('jwt-token');
       }else{
-        this.router.navigate(['/login']);
+       return null
       }
-      return
     }else{
-      this.router.navigate(['/login']);
-      return
+      return null
     }
     
   }
 
-
+  isLoggedIn() {
+    return this.getToken() !== null;
+  }
   decodeToken() {
     this.jwtToken= sessionStorage.getItem('jwt-token')
     if (this.jwtToken) {

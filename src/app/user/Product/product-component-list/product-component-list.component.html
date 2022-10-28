@@ -2,9 +2,10 @@
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2"></span></h2>
     </div>
+
     <div  class="row px-xl-5 pb-3">
         <div *ngFor="let data of posts" class="col-lg-3 col-md-6 col-sm-12 pb-1">
-            is in cart {{isIncart(data.id)}}
+            {{isIncart(data.id)}}
             <div class="card product-item border-0 mb-4">
                 <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                     <img class="img-fluid w-100" src="{{data.mainImage}}" alt="">
@@ -17,7 +18,19 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between bg-light border">
                     <a (click)="handleViewClick(data.id)" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                    <a (click)="handleAddToCartClick(data.id)" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                    <div *ngIf="isItemIncart else elseBlock">
+                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                        
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-primary btn-plus"  (click)="handleViewCart()">
+                                 View Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template #elseBlock><a (click)="handleAddToCartClick(data.id)" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                    </ng-template>
+
                     <a *ngIf="!isWishlist" (click)="handleAddToWishlist(data.id)" class="btn btn-sm text-dark p-0"><i class="fas fa-heart text-primary"></i>Add To Wishlist</a>
                 </div>
             </div>

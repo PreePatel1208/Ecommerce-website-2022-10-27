@@ -28,17 +28,19 @@ const headerDict = (arg: HeaderDict = { token: '', contentType: 'application/jso
   providedIn: 'root'
 })
 export class ProductService {
-
+token:any=""
+header:any={}
   constructor(private http: HttpClient,
      private router: Router,
      private jwt: JWTDecodeService,
      ) { }
-    token=this.jwt.getToken() 
-      header = {
-      headers: new HttpHeaders({
-        // accept:application/json",
-        Authorization:"bearer "+this.token}),
-    }
+    // token=this.jwt.getToken() 
+    //   header = {
+    //   headers: new HttpHeaders({
+    //     // accept:application/json",
+    //     Authorization:"bearer "+this.token}),
+    // }
+    
   requestOptions = {
     headers: new HttpHeaders({
       "Access-Control-Allow-Origin": '*',
@@ -46,7 +48,25 @@ export class ProductService {
       "X-Shopify-Access-Token": "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"
     }),
   };
+
+  setHeaders(checked_auth:boolean = true){
+  this.token=this.jwt.getToken() 
+  if(this.token){
+    this.header = {
+      headers: new HttpHeaders({
+        // accept:application/json",
+        Authorization:"bearer "+this.token}),
+    }
+  }else{
+    if (checked_auth) {
+      this.router.navigate(['login']);  
+    }
+  }
+   
+  }
+
   placeOrder(data:any){
+    this.setHeaders(true)
     return this.http.post("http://localhost:9500/api/order", data,
     this.header
   );
@@ -55,6 +75,7 @@ export class ProductService {
     return this.http.get("http://localhost:9500/api/product");
   }
 getOrders(){
+  this.setHeaders(false)
   return this.http.get("http://localhost:9500/api/order",
   this.header
 );
@@ -63,23 +84,29 @@ getOrders(){
     return this.http.get("http://localhost:9500/api/category");
   }
   addpost(data: any) {
+    this.setHeaders(true)
     return this.http.post("http://localhost:9500/api/product",
       data,
       this.header
     );
   }
   deletepost(id: number) {
+    this.setHeaders(true)
     return this.http.delete("http://localhost:9500/api/product/" + id,
       this.header
     );
   }
   
   addToCart(data: any) {
+    this.setHeaders(true)
     return this.http.post("http://localhost:9500/api/cart", data,
       this.header
     );
   }
   getCart() {
+    // this.setHeaders(true)
+    this.setHeaders(false)
+
     return this.http.get("http://localhost:9500/api/cart",
       this.header
     );
@@ -90,12 +117,14 @@ getOrders(){
     );
   }
   addWhishlist(data:any){
+    this.setHeaders(true)
     return this.http.post("http://localhost:9500/api/favorite",
     data,
     this.header
   );
   }
   updatepost(id: number, data: any) {
+    this.setHeaders(true)
     this.http.patch("http://localhost:9500/api/product/" + id + "/details",
       {
         name: data.name,
@@ -127,6 +156,9 @@ getOrders(){
     return this.http.get("http://localhost:9500/api/product/" + id);
   }
   getWishlist(){
+  this.setHeaders(false)
+
+    // this.setHeaders(true)
     return this.http.get("http://localhost:9500/api/favorite",
     this.header
   );
@@ -148,11 +180,13 @@ getOrders(){
     );
   }
   increaseQuantity(data: any) {
+    this.setHeaders(true)
     return this.http.patch("http://localhost:9500/api/cart/increase-one", data,
       this.header
     );
   }
   decreaseQuantity(data: any) {
+    this.setHeaders(true)
     return this.http.patch("http://localhost:9500/api/cart/reduce-one", data,
       this.header
     );

@@ -44,14 +44,16 @@ return next.handle(request)
                 }
                 case 403: {
                this.showDanger("Forbidden")
-
                   break ;
                 }
-                case 404: {
-               this.showDanger("Not Found")
-
-                  break ;
-                }
+                case 402: {
+                  this.showDanger("your card is expire")
+                     break ;
+                   }
+              //   case 404: {
+              //  this.showDanger("Not Found")
+              //     break ;
+              //   }
                 case 422: {
                this.showDanger("Unprocessable Entity")
 
@@ -59,12 +61,9 @@ return next.handle(request)
                 }
                 case 500: {
                this.showDanger("Internal Server Error")
-                  
                   break ;
                 }
-                default: {
-              
-                }
+                
              }
                
              }

@@ -26,6 +26,7 @@ export class ProductComponentListComponent implements OnInit {
 
   posts = <Props[]>[]
   cart:any[]=[]
+  isItemIncart=0
   page = 0;
   pageSize = 3;
   collectionSize = 0;
@@ -61,6 +62,10 @@ export class ProductComponentListComponent implements OnInit {
   handleViewClick(id: any) {
     this.router.navigate(['/single-detail', { "product_id": id }]);
   }
+  handleViewCart(){
+    this.router.navigate(['/cart-detail']);
+  }
+  
   handleAddToCartClick(id: any) {
     const data = {
       productId: id,
@@ -93,11 +98,48 @@ export class ProductComponentListComponent implements OnInit {
     })
   }
 isIncart(id:any){
-this.cart.filter((element)=>{
-    return element._id==id
-})
+ 
+this.isItemIncart=0
+  this.cart.forEach((element) => {
+    console.log("id",element.product.id);
+    
+      if (element.product.id ==id) {
+        console.log("matched");
+        
+        this.isItemIncart=1
+      }
+    });
 }
-
+decreseClick(id:number,color:string,size:string){
+  const data={
+    productId: id,
+    selectedColor: color,
+    selectedSize: size
+  }
+  console.log(data);
+  
+  this.product.decreaseQuantity(data).subscribe((data:any)=>{
+    console.log(data);
+    this.getCartDetail()
+   
+    this.getProductData()
+    
+  })
+}
+increseClick(id:number,color:string,size:string){
+  const data={
+    productId: id,
+    selectedColor: color,
+    selectedSize: size
+  }
+  console.log(data);
+  
+  this.product.increaseQuantity(data).subscribe((data:any)=>{
+    console.log(data);
+    this.getCartDetail()
+    this.getProductData()
+  })
+}
   getWishlistProduct() {
     this.product.getWishlist().subscribe((data: any) => {
       console.log(data.favorite.products);

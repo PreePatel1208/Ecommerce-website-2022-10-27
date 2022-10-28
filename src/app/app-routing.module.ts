@@ -23,14 +23,9 @@ const routes: Routes = [
   },
   {
     path:'user-product-list',
-    canActivate: [UserAuthGuard],
     loadChildren: () => import('./user/Product/productlist/productlist.module').then(m => m.ProductlistModule)
   },
-  {
-    path:'user-product-list',
-    canActivate: [UserAuthGuard],
-    loadChildren: () => import('./user/Product/productlist/productlist.module').then(m => m.ProductlistModule)
-  },
+ 
   
 ];
 

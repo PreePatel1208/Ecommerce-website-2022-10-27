@@ -62,10 +62,10 @@ showDanger(dangerTpl: any) {
       cvc: "456"
     }
     this.Product.placeOrder(data).subscribe((data:any)=>{
-      console.log(data);
-      this.showSuccess("Order placed successlly")
-      this.getCartDetail()
-      // this.cart=[]/
+    this.cart=[]
+    this.totalCheckoutPrice=0
+  
+    this.showSuccess("Order placed successlly")
     })
   }
   increseClick(id:string,color:string,size:string){
@@ -97,8 +97,8 @@ showDanger(dangerTpl: any) {
       data.cart.items.forEach((item:any)=>{
         totalAmount+= item.product.price*item.totalProductQuantity;
     }); 
-
     this.totalcount.changeMessage2(totalAmount)
+    this.totalcount.changeMessage(this.cart.length)
     })
     
    
